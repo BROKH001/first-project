@@ -15,8 +15,8 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate(['name' => 'required|string']);
-        $student = StudentModel::created($validated);
+        $validated = $request->validate(['sname' => 'required|string']);
+        $student = StudentModel::create($validated);
         return response()->json($student, 201);
     }
 
@@ -24,7 +24,6 @@ class StudentController extends Controller
     {
         $student = StudentModel::find($id);
         if (!$student) return response()->json(['message' => 'Not Found'], 404);
-
         return $student;
     }
 
@@ -33,7 +32,7 @@ class StudentController extends Controller
         $student = StudentModel::find($id);
         if (!$student) return response()->json(['message' => 'Not Found'], 404);
 
-        $validated = $request->validate(['name' => 'required|string']);
+        $validated = $request->validate(['sname' => 'required|string']);
         $student->update($validated);
 
         return response()->json($student);
